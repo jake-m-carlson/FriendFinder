@@ -1,4 +1,4 @@
-var friendData = ('/../data/friends.js');
+var friendData = require('../data/friends');
 
 module.exports = function (app) {
 
@@ -7,6 +7,6 @@ module.exports = function (app) {
     });
 
     app.post('/api/friends', function(req, res) {
-
+        res.json(friendData);
     });
-}
+};
