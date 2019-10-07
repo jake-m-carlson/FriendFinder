@@ -12,7 +12,7 @@ app.use(express.json());
 //   // successfully connected **
 // });
 
-// require("./app/routing/apiRoutes")(app);
+require("./app/routing/apiRoutes")(app);
 require("./app/routing/htmlRoutes")(app);
 
 // Start our server so that it can begin listening to client requests.
