@@ -15,12 +15,41 @@
     <!-- Glyphicons -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Chosen -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js" ></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
 </head>
 
 <body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>About You</h2>
+            </div>
+            <form style="padding:10px" onsubmit="return false;">
+                <div class="form-group">
+                    <div style="margin:5px">
+                        <label for="name">Name(Required)</label>
+                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Enter Name"
+                            required>
+                    </div>
+                    <div style="margin:5px">
+                        <label for="photo">Link to photo image</label>
+                        <input type="text" name="photo" class="form-control" id="inputPhoto" placeholder="link to picture" required>
+                    </div>
+
+                </div>
+                <br>
+                <div id="questionaires">
+
+                </div>
+                <button class="btn btn-primary col-md-12" onclick="submitResult()">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    
 
 </body>
 
