@@ -173,7 +173,7 @@
                 alert("Please fill in all of the text boxes and select an answer for each quesiton");
                 return;
             }
-            $.post("/api/friends", friend, function (bestFriend) {
+            $.post("./api/friends", friend, function (bestFriend) {
                 console.log(bestFriend);
                 $("#friendName").text(bestFriend.name);
                 $("#friendImage").attr("src", bestFriend.photo);

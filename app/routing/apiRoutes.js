@@ -1,15 +1,15 @@
-var friendData = require('../data/friends');
+var friendData = require("../data/friends");
 
 module.exports = function (app) {
 
-    app.get('/api/friends', function (req, res) {
+    app.get("./api/friends", function (req, res) {
         const friend = request.body;
         const bestFriend = findBestFriend(friends, friend);
         friendData.push(friend);
         res.json(bestFriend);
     });
 
-    app.post('/api/friends', function(req, res) {
+    app.post("./api/friends", function(req, res) {
         res.json(friendData);
     });
 };
