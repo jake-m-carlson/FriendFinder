@@ -48,8 +48,40 @@
         </div>
     </div>
 
+<!-- Questions -->
+    <template id="questionTemp">
+        <div class="form-group">
+            <h3 class="question-number"> </h3>
+            <label>
+                <p class="question" style="font-size:20px"></p>
+            </label>
+            <select class="form-control options col-md-3" name="scores" style="cursor:pointer">
+                <option selected value=" ">Select Option</option>
+            </select>
+        </div>
+        <hr>
+    </template>
 
-    
+    <!-- Modal -->
+    <div class="modal fade" id="displayFriend" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-size: 40px">Best Match</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="friendName" style="font-size: 35px;"></p>
+                    <img id="friendImage" style="height: 200px;width:auto">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
