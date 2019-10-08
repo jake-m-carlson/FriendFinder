@@ -17,6 +17,10 @@
     <!-- Chosen -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -35,7 +39,8 @@
                     </div>
                     <div style="margin:5px">
                         <label for="photo">Link to photo image</label>
-                        <input type="text" name="photo" class="form-control" id="inputPhoto" placeholder="link to picture" required>
+                        <input type="text" name="photo" class="form-control" id="inputPhoto"
+                            placeholder="link to picture" required>
                     </div>
 
                 </div>
@@ -43,12 +48,12 @@
                 <div id="questions">
 
                 </div>
-                <button class="btn btn-primary col-md-12" onclick="submitResult()">Submit</button>
+                <button class="btn btn-primary col-md-12" onclick="sendResults()">Submit</button>
             </form>
         </div>
     </div>
 
-<!-- Questions -->
+    <!-- Questions -->
     <template id="questionTemp">
         <div class="form-group">
             <h3 class="question-number"> </h3>
@@ -87,16 +92,16 @@
         // questions 
         const questions = [
 
-        "You like pumpkin spice latte.",
-        "You think arriving 10 minutes is 'on time'.",
-        "You can wake up with only setting one alarm, and not his 'snooze'.",
-        "Your fall wardrobe consists of flannels, black vest, and dark denim.",
-        "Brunch is an acceptable verb on Sunday.",
-        "It is not a 'party' until there is a charcuterie plate.",
-        "You cannot walk past a dog without petting it.",
-        "You do not let your car get in the 'red-zone' for gas.",
-        "You shop at Costco.",
-        "You allow yourself up to 24 hours to reply to a text.",
+            "You like pumpkin spice latte.",
+            "You think arriving 10 minutes is 'on time'.",
+            "You can wake up with only setting one alarm, and not his 'snooze'.",
+            "Your fall wardrobe consists of flannels, black vest, and dark denim.",
+            "Brunch is an acceptable verb on Sunday.",
+            "It is not a 'party' until there is a charcuterie plate.",
+            "You cannot walk past a dog without petting it.",
+            "You do not let your car get in the 'red-zone' for gas.",
+            "You shop at Costco.",
+            "You allow yourself up to 24 hours to reply to a text.",
 
         ]
 
@@ -128,7 +133,7 @@
         function displayQs() {
             const questionElement = $("")
             var optionsSelected = $(".options");
-            questions.forEach(function(questionaire, index) {
+            questions.forEach(function (questionaire, index) {
                 const templateHtml = $("#questionTemp").html();
                 const questionTemp = $(templateHtml);
                 questionTemp.find(".question").text(questionaire);
@@ -136,19 +141,48 @@
 
                 options.forEach(function (option) {
                     const optionElement = $("<option>");
-                        optionElement.attr("value", option.value)
-                        const opt = optionElement.text(option.label);
-                        questionTemp.find(".options").append(optionElement);
+                    optionElement.attr("value", option.value)
+                    const opt = optionElement.text(option.label);
+                    questionTemp.find(".options").append(optionElement);
                 })
 
                 $("#questions").append(questionTemp)
             })
         }
 
+        function sendResults() {
+            const name = $("input[name=name]").val();
+            const photo = $("input[name=photo]").val();
+            const scores = $('select[name=scores]')
+                .map(function () {
+                    return $(this).children('option:selected').val()
+                })
+                .get();
 
-    
-    
-    
+            const friend = { name, photo, scores };
+
+            let validity = true;
+            for (let score of scores) {
+                if (score === "") {
+                    validity = false;
+                    break;
+                }
+            }
+
+            if (!name || !photo || !validity) {
+                alert("Please fill in all of the text boxes and select an answer for each quesiton");
+                return;
+            }
+            $.post("/api/friends", friend, function (bestFriend) {
+                console.log(bestFriend);
+                $("#friendName").text(bestFriend.name);
+                $("#friendImage").attr("src", bestFriend.photo);
+                $("#displayFriend").modal('show');
+            });
+        }
+
+
+
     </script>
 
 </body>
