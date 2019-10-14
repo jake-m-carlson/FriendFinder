@@ -8,7 +8,6 @@
     <title>FriendFinder</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- Javascript -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -20,6 +19,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -68,6 +68,8 @@
     </template>
 
     <!-- Modal -->
+
+
     <div class="modal fade" id="displayFriend" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -173,11 +175,11 @@
                 alert("Please fill in all of the text boxes and select an answer for each quesiton");
                 return;
             }
-            $.post("./api/friends", friend, function (bestFriend) {
-                console.log(bestFriend);
-                $("#friendName").text(bestFriend.name);
-                $("#friendImage").attr("src", bestFriend.photo);
-                $("#displayFriend").modal('show');
+            $.post("/api/friends", friend, function (bestFriend) {
+                console.log(bestFriend[0].name);
+                $("#friendName").text(bestFriend[0].name);
+                $("#friendImage").attr("src", bestFriend[0].photo);
+                $("#displayFriend").modal("toggle");
             });
         }
 
